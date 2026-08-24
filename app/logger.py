@@ -2,17 +2,20 @@ import os
 import json
 from datetime import datetime
 
-ensure_ascii=False 
+LOG_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "results",
+    "log.json"
+)
 
-LOG_PATH = "LLM-Security-stand-/results/log.json"
-
-def log(prompt, response, mode, blocked):
+def log(prompt, response, mode, blocked, attack_type):
     data = []
     entry = {
         "prompt" : prompt, 
         "response" : response, 
         "mode" : mode, 
         "blocked" : blocked,
+        "attack_type" : attack_type,
         "timestamp": datetime.now().isoformat()
     }
 
@@ -30,9 +33,9 @@ def log(prompt, response, mode, blocked):
 # проверка изменения размера файла
     new_size = os.path.getsize(LOG_PATH)
     if original_size == new_size:
-        print("Размер файла не изменился, не успешное добавление логов")
+        return("Размер файла не изменился, не успешное добавление логов")
     else:
-        print("Файл profile.json успешно изменен")
+        return("Файл profile.json успешно изменен")
 
 
 
