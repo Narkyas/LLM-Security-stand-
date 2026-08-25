@@ -18,12 +18,17 @@ def ask(prompt, mode):
         
     session = requests.Session()
     session.proxies = {"http": "", "https": ""}
-    response = session.post("http://localhost:11434/api/chat",
+    try:
+        response = session.post("http://localhost:11434/api/chat",
                             json = {"model": "orca-mini",
                                     "messages": [{"role": "system", "content" : system_prompt}, 
                                                    {"role": "user", "content" : prompt}],
-                                    "stream": False}
-    )
+                                    "stream": False},
+                            timeout=120
+        )
+
+    except requests.exceptions.Timeout:
+        return ("TIMEOUT: запрос превысил лимит времени")
  
     if (response.status_code != 200):
         print("Ошибка при отправке запроса:", response.status_code)
