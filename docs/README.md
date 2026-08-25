@@ -8,14 +8,14 @@
 
 ## Архитектура
 
-Атакующий скрипт (run_tests.py)
-▼
-app/chat.py — LLM-приложение в виде скрипта с системным промптом
-├── app/defense.py — защитный слой (режим defended)
-├── app/logger.py — логирование в results/log.json
-▼
-Ollama (локальный LLM-сервер, порт 11434)
-▼
+Атакующий скрипт (run_tests.py)\
+▼\
+app/chat.py — LLM-приложение в виде скрипта с системным промптом\
+├── app/defense.py — защитный слой (режим defended)\
+├── app/logger.py — логирование в results/log.json\
+▼\
+Ollama (локальный LLM-сервер, порт 11434)\
+▼\
 orca-mini:3b — языковая модель
 
 
